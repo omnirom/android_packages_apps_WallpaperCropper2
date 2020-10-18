@@ -16,12 +16,14 @@
 
 package com.android.gallery3d.filtershow.crop;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
@@ -53,6 +55,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import java.util.ArrayList;
 
 /**
  * Activity for cropping an image.
@@ -92,6 +96,8 @@ public class CropActivity extends Activity {
 
     private static final int FLAG_CHECK = DO_SET_WALLPAPER | DO_RETURN_DATA | DO_EXTRA_OUTPUT;
 
+    private static final int PERMISSION_REQUEST_STORAGE = 2;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +111,7 @@ public class CropActivity extends Activity {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            actionBar.setCustomView(R.layout.filtershow_actionbar);
+            actionBar.setCustomView(R.layout.crop_actionbar);
 
             View mSaveButton = actionBar.getCustomView();
             mSaveButton.setOnClickListener(new OnClickListener() {
@@ -115,6 +121,14 @@ public class CropActivity extends Activity {
                 }
             });
         }
+
+        if (!needRequestStoragePermission()) {
+            init();
+        }
+    }
+
+    private void init() {
+        Intent intent = getIntent();
         if (intent.getData() != null) {
             mSourceUri = intent.getData();
             startLoadBitmap(mSourceUri);
@@ -164,6 +178,8 @@ public class CropActivity extends Activity {
         if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE) {
             mSourceUri = data.getData();
             startLoadBitmap(mSourceUri);
+        } else {
+            finish();
         }
     }
 
@@ -644,5 +660,58 @@ public class CropActivity extends Activity {
         }
         RectF scaledCrop = CropMath.getScaledCropBounds(crop, photo, imageBounds);
         return scaledCrop;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+            int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_STORAGE: {
+                if (checkPermissionGrantResults(grantResults)) {
+                    init();
+                } else {
+                    finish();
+                }
+            }
+        }
+    }
+
+    private boolean needRequestStoragePermission() {
+        boolean needRequest = false;
+        String[] permissions = {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        };
+        ArrayList<String> permissionList = new ArrayList<String>();
+        for (String permission : permissions) {
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(permission);
+                needRequest = true;
+            }
+        }
+
+        if (needRequest) {
+            int count = permissionList.size();
+            if (count > 0) {
+                String[] permissionArray = new String[count];
+                for (int i = 0; i < count; i++) {
+                    permissionArray[i] = permissionList.get(i);
+                }
+
+                requestPermissions(permissionArray, PERMISSION_REQUEST_STORAGE);
+            }
+        }
+
+        return needRequest;
+    }
+
+    private boolean checkPermissionGrantResults(int[] grantResults) {
+        for (int result : grantResults) {
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
     }
 }

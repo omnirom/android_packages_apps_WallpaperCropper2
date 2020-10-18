@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.gallery3d">
+        xmlns:settings="http://schemas.android.com/apk/res/org.omnirom.wallpapercropper">
 
     <PreferenceCategory android:title="@string/slideshow_settings" >
         <SwitchPreference

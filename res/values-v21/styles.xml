@@ -33,7 +33,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:actionBarStyle">@style/Material.ActionBar</item>
     </style>
-    <style name="Theme.Crop" parent="Theme.Gallery">
+    <style name="Theme.Crop" parent="@android:style/Theme.DeviceDefault.Settings">
     </style>
     <style name="Theme.FilterShow" parent="Theme.Gallery">
     </style>
