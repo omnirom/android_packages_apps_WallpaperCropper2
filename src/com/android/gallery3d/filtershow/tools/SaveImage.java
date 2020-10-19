@@ -87,7 +87,6 @@ public class SaveImage {
     private int mCurrentProcessingStep = 1;
 
     public static final int MAX_PROCESSING_STEPS = 6;
-    public static final String DEFAULT_SAVE_DIRECTORY = "EditedOnlinePhotos";
 
     // In order to support the new edit-save behavior such that user won't see
     // the edited image together with the original image, we are adding a new
@@ -147,8 +146,8 @@ public class SaveImage {
     public static File getFinalSaveDirectory(Context context, Uri sourceUri) {
         File saveDirectory = SaveImage.getSaveDirectory(context, sourceUri);
         if ((saveDirectory == null) || !saveDirectory.canWrite()) {
-            saveDirectory = new File(Environment.getExternalStorageDirectory(),
-                    SaveImage.DEFAULT_SAVE_DIRECTORY);
+            saveDirectory = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES);
         }
         // Create the directory if it doesn't exist
         if (!saveDirectory.exists())
