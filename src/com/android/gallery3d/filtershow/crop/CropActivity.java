@@ -680,7 +680,6 @@ public class CropActivity extends Activity {
     private boolean needRequestStoragePermission() {
         boolean needRequest = false;
         String[] permissions = {
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
         };
         ArrayList<String> permissionList = new ArrayList<String>();

@@ -26,9 +26,7 @@ LOCAL_USE_AAPT2 := true
 LOCAL_PACKAGE_NAME := WallpaperCropper2
 
 LOCAL_CERTIFICATE := shared
-
 LOCAL_SDK_VERSION := current
-LOCAL_MIN_SDK_VERSION := 24
 
 LOCAL_JNI_SHARED_LIBRARIES := \
     libjni_eglfence \
