@@ -11,7 +11,7 @@ include $(CLEAR_VARS)
 
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_SDK_VERSION := 9
-LOCAL_MODULE    := libjni_filtershow_filters
+LOCAL_MODULE    := libjni_filtershow_filters_wc
 LOCAL_SRC_FILES := gradient.c \
                    saturated.c \
                    exposure.c \

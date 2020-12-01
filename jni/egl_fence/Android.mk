@@ -18,7 +18,7 @@ LOCAL_SDK_VERSION := 9
 
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_MODULE := libjni_eglfence
+LOCAL_MODULE := libjni_eglfence_wc
 
 LOCAL_LDLIBS := -llog -lEGL
 

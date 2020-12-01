@@ -29,9 +29,9 @@ LOCAL_CERTIFICATE := shared
 LOCAL_SDK_VERSION := current
 
 LOCAL_JNI_SHARED_LIBRARIES := \
-    libjni_eglfence \
-    libjni_filtershow_filters \
-    libjni_jpegstream
+    libjni_eglfence_wc \
+    libjni_filtershow_filters_wc \
+    libjni_jpegstream_wc
 LOCAL_MULTILIB := both
 
 LOCAL_PROGUARD_ENABLED := disabled

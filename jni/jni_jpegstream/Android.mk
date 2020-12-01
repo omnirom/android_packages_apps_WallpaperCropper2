@@ -4,7 +4,7 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE        := libjni_jpegstream
+LOCAL_MODULE        := libjni_jpegstream_wc
 
 LOCAL_NDK_STL_VARIANT := c++_static
 
