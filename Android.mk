@@ -37,6 +37,7 @@ LOCAL_MULTILIB := both
 LOCAL_PROGUARD_ENABLED := disabled
 
 LOCAL_JAVA_LIBRARIES := org.apache.http.legacy
+LOCAL_USES_LIBRARIES := org.apache.http.legacy
 
 include $(BUILD_PACKAGE)
 
