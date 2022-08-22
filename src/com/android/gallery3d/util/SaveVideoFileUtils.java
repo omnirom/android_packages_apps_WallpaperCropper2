@@ -28,6 +28,7 @@ import android.provider.MediaStore.Video.VideoColumns;
 import com.android.gallery3d.filtershow.tools.SaveImage.ContentResolverQueryCallback;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -147,7 +148,11 @@ public class SaveVideoFileUtils {
         if (duration != null) {
             durationMs = Integer.parseInt(duration);
         }
-        retriever.release();
+        try {
+            retriever.release();
+        } catch (IOException e) {
+            // Ignore errors occurred while releasing the retriever.
+        }
         return durationMs;
     }
 
