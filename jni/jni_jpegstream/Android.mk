@@ -31,5 +31,6 @@ LOCAL_SRC_FILES     := \
     src/outputstream_wrapper.cpp \
     src/stream_wrapper.cpp
 
+LOCAL_SYSTEM_EXT_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)

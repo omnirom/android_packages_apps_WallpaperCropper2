@@ -22,5 +22,6 @@ LOCAL_MODULE := libjni_eglfence_wc
 
 LOCAL_LDLIBS := -llog -lEGL
 
+LOCAL_SYSTEM_EXT_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)

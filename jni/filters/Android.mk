@@ -36,5 +36,6 @@ LOCAL_CFLAGS += -ffast-math -O3 -funroll-loops
 LOCAL_CFLAGS += $(Gallery2_jni_cflags)
 LOCAL_LDLIBS := -llog -ljnigraphics
 LOCAL_ARM_MODE := arm
+LOCAL_SYSTEM_EXT_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)
